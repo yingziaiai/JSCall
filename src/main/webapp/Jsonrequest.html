@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<link>http://blog.csdn.net/z69183787/article/details/51073003</link>
+<script type="text/javascript"
+    src="<%=basePath%>resources/scripts/jquery-2.0.3.min.js"></script>
+<script type="text/javascript">
+$(function(){
+    $("#send").click(function(){
+
+        var jsondata = $("#jsondata").val();
+
+        var jsonobj = JSON.parse(jsondata)
+
+         
+
+        var callback = function (data) {
+
+            $("#result").html(JSON.stringify(data))
+
+        }
+        $.postJSON('<%=basePath%>api/user/test', jsonobj, callback)
+        });
+    })
+
+ 
+
+    $.postJSON = function(url, data, callback) {
+
+        return jQuery.ajax({
+
+            'type' : 'POST',
+
+            'url' : url,
+
+            'contentType' : 'application/json',
+
+            'data' : JSON.stringify(data),
+
+            'dataType' : 'json',
+
+            'success' : callback
+
+        });
+
+    };
+
+</script>
+
+</head>
+
+<body>
+
+    JSON对象
+
+    <br>
+
+    <textarea id="jsondata" cols="60" rows="5">
+
+{"id":2,"gender":0,"mobile":"15072370640","password":"123456","accessToken":"fd6bf3dd3cca4b0ca7c9099447994dba"}
+
+    </textarea><br>
+
+ 
+
+    <button id="send">POST</button><br>
+
+ 
+
+    <font color="red" id="result"></font>
+
+</body>
+
+</html>
